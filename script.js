@@ -5,20 +5,30 @@ canvas.height =window.innerHeight;
 let particlesArray = [];
 const numberOfParticles =300;
 
+//measure title element
+let titleElement = document.getElementById('title1');
+let titleMeasurements=titleElement.getBoundingClientRect();
+let title={
+    x:titleMeasurements.left,
+    y:titleMeasurements.top,
+    width:titleMeasurements.width,
+    height:titleMeasurements.height
+}
+
 
 class Particle{
     constructor(x,y){
         this.x=x;
         this.y=y;
-        this.size=10;
-        this.weight=2;
+        this.size=Math.random()*15+1;
+        this.weight=Math.random()*1+1;
         this.directionX=-2;
     }
     update(){
         if (this.y>canvas.height){ 
         this.y=0-this.size;
-        this.weight=2;
-        this.x=Math.random()*canvas.width;
+        this.weight=Math.random()*1+1;
+        this.x=Math.random()*canvas.width*1.3;
         }
         this.weight+=0.05;
         this.y+=this.weight;
@@ -26,7 +36,7 @@ class Particle{
 
     }
     draw(){
-        ctx.fillStyle='red';
+        ctx.fillStyle='green';
         ctx.beginPath();//start drawing a circle
         ctx.arc(this.x, this.y,this.size,0,Math.PI*2);
         ctx.closePath();
@@ -53,6 +63,7 @@ function animate(){
        particlesArray[i].update();
        particlesArray[i].draw();
    }
+    ctx.fillRect(title.x,title.y,title.width,title.height);
     requestAnimationFrame(animate);//this is optimized and will adjust refresh rate which makes it better than setInterval
 }
 animate();
