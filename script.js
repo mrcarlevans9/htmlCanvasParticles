@@ -57,6 +57,7 @@ class Particle{
     }
 }
 function init(){
+    particlesArray=[];
     for (let i = 0; i < numberOfParticles; i++ ){
         const x= Math.random()*canvas.width;
         const y= Math.random()*canvas.height;
@@ -79,3 +80,17 @@ function animate(){
     requestAnimationFrame(animate);//this is optimized and will adjust refresh rate which makes it better than setInterval
 }
 animate();
+window.addEventListener('resize',function(){
+    canvas.width=window.innerWidth;
+    canvas.height=window.innerHeight;
+    titleMeasurements=titleElement.getBoundingClientRect();
+    title={
+        x:titleMeasurements.left,
+        y:titleMeasurements.top,
+        width:titleMeasurements.width,
+        height:10
+    }
+    init();
+
+
+});
