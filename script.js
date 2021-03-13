@@ -12,7 +12,7 @@ let title={
     x:titleMeasurements.left,
     y:titleMeasurements.top,
     width:titleMeasurements.width,
-    height:titleMeasurements.height
+    height:10
 }
 
 
@@ -33,6 +33,18 @@ class Particle{
         this.weight+=0.05;
         this.y+=this.weight;
         this.x+=this.directionX;
+
+        //check for collision between particles and title element
+        if (
+            this.x<title.x+title.width&&
+            this.x+this.size>title.x&&
+            this.y<title.y+title.height&&
+            this.y+this.size>title.y
+
+        ){
+            this.y-=3;
+            this.weight*=-0.5
+        }
 
     }
     draw(){
@@ -63,7 +75,7 @@ function animate(){
        particlesArray[i].update();
        particlesArray[i].draw();
    }
-    ctx.fillRect(title.x,title.y,title.width,title.height);
+    
     requestAnimationFrame(animate);//this is optimized and will adjust refresh rate which makes it better than setInterval
 }
 animate();
