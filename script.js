@@ -22,7 +22,7 @@ class Particle{
         this.y=y;
         this.size=Math.random()*15+1;
         this.weight=Math.random()*1+1;
-        this.directionX=-2;
+        this.directionX=(Math.random()*2)-2;
     }
     update(){
         if (this.y>canvas.height){ 
